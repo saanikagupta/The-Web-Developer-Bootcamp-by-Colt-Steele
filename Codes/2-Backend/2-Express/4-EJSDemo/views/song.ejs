@@ -1,0 +1,11 @@
+<%- include("partials/header") %>
+
+<h1>You fell in love with: <%= songName.toUpperCase() %></h1>
+
+<% if(songName.toLowerCase() === "baby"){ %>
+    <p>GOOD CHOICE!</p>
+<% } else{ %>
+    <p>BAD CHOICE! SHOULD HAVE SAID BABY!</p>
+<% } %>
+
+<%- include("partials/footer") %>

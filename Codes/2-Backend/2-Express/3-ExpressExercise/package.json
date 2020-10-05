@@ -1,0 +1,14 @@
+{
+  "name": "3-expressexercise",
+  "version": "1.0.0",
+  "description": "Solution to first Express exercise!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saanika Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

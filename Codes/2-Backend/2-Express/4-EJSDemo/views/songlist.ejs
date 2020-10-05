@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+
+<h1>Song list!</h1>
+<p>Usinf a for loop</p>
+<% for(let i = 0; i < songs.length; i++){ %>
+    <li>
+        <%= songs[i].singer %> - <strong><%= songs[i].title %></strong>
+    </li>
+<% } %>
+
+<p>Using foeEach()</p>
+<% songs.forEach(function(song){ %>
+    <li>
+        <%= song.singer %> - <strong><%= song.title %></strong>
+    </li>
+<% }); %>
+
+<%- include("partials/footer") %>
