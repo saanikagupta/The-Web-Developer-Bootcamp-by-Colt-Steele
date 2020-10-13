@@ -8,17 +8,17 @@ mongoose.connect("mongodb://localhost:27017/blog_demo_2", {
 const Post = require("./models/post");
 const User = require("./models/user");
 
-// User.create({
-//     email: "bob@gmail.com",
-//     name: "Bob"
-// }, function(err, user){
-//     if(err){
-//         console.log(err);
-//     }
-//     else{
-//         console.log(user);
-//     }
-// });
+User.create({
+    email: "bob@gmail.com",
+    name: "Bob"
+}, function(err, user){
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log(user);
+    }
+});
 
 // A mini callback hell! :P
 Post.create({

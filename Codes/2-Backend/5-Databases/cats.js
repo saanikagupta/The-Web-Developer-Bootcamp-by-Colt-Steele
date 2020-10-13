@@ -32,7 +32,7 @@ const george = new Cat({
 });
 
 // Might not necessarily be saved by this, hence passing the callback function.
-// This function will be executed after saving process is done.
+// This callback function will be executed after saving process is done.
 george.save(function(err, cat){
     if(err){
         console.log("Something went wrong!");
