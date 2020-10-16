@@ -2,13 +2,6 @@ const mongoose = require("mongoose"),
       Campground = require("./models/campground"),
       Comment   = require("./models/comment");
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true
-})
-.then(() => console.log('Connected to DB!'))
-.catch(error => console.log(error.message));
-
 const data = [
     {
         name: "Cloud's Rest", 

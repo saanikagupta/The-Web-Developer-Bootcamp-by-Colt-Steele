@@ -5,14 +5,12 @@ const express       = require("express"),
       app           = express(),
       bodyParser    = require("body-parser"),
       mongoose      = require("mongoose"),
-      passport      = require("passport");
-      LocalStrategy = require("passport-local");
+      passport      = require("passport"),
+      LocalStrategy = require("passport-local"),
       Campground    = require("./models/campground"),
       Comment       = require("./models/comment"),
-      User          = require("./models/user");
+      User          = require("./models/user"),
       seedDB        = require("./seeds");
-
-seedDB(); // Every time the server starts, this file will first remove all the campgrounds, then create a bunch of campgrounds and comments in them
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", {
     useNewUrlParser: true, 
@@ -23,6 +21,7 @@ mongoose.connect("mongodb://localhost:27017/yelp_camp", {
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+seedDB(); // Every time the server starts, this file will first remove all the campgrounds, then create a bunch of campgrounds and comments in them
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({

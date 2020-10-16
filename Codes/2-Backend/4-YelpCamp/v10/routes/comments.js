@@ -5,9 +5,10 @@ const express = require("express");
 const router = express.Router({mergeParams: true}); // We will add all the routes in router instead of app
 const Campground = require("../models/campground"); // Works fine without it
 const Comment = require("../models/comment"); // Works fine without it as it is already required in app.js
+const middleware = require("../middleware");
 
 // Comments NEW ROUTE
-router.get("/new", isLoggedIn, function(req, res){
+router.get("/new", middleware.isLoggedIn, function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(err){
             console.log(err);
@@ -20,7 +21,7 @@ router.get("/new", isLoggedIn, function(req, res){
 
 // Comments CREATE ROUTE
 // We need to put the isLoggedIn middleware here as well as otherwise someone can make a post request using postman and the comment will be added
-router.post("/", isLoggedIn, function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(err){
             console.log(err);
@@ -46,12 +47,41 @@ router.post("/", isLoggedIn, function(req, res){
     });
 });
 
-// Middleware
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
+// COMMENT EDIT ROUTE
+router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
+        if(err){
+            res.redirect(back);
+        }
+        else{
+            res.render("comments/edit", {campground_id: req.params.id, comment: foundComment});
+        }
+    });
+});
+
+// COMMENT UPDATE ROUTE
+router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+        if(err){
+            res.redirect("back");
+        }
+        else{
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+});
+
+// COMMENT DESTROY ROUTE
+router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("back");
+        }
+        else{
+            // We could have used back here to go back to the campground show page. But someone can make request from POSTMAN, hence we need to be specific
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+});
 
 module.exports = router;
