@@ -13,8 +13,8 @@ mongoose.connect("mongodb://localhost:27017/yelp_camp", {
     useNewUrlParser: true, 
     useUnifiedTopology: true
 })
-.then(() => console.log('Connected to DB!'))
-.catch(error => console.log(error.message));
+    .then(() => console.log('Connected to DB!'))
+    .catch(error => console.log(error.message));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 seedDB(); // Every time the server starts, this file will first remove all the campgrounds, then create a bunch of campgrounds and comments in them

@@ -10,8 +10,8 @@ mongoose.connect("mongodb://localhost:27017/auth_demo_app", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log('Connected to DB!'))
-.catch(error => console.log(error.message));
+    .then(() => console.log('Connected to DB!'))
+    .catch(error => console.log(error.message));
 
 const app = express();
 app.set("view engine", "ejs");
